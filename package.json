@@ -1,0 +1,17 @@
+{
+  "name": "aipoc",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "audio": "node audio/index.js",
+    "video": "node video/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@langchain/core": "^0.2.20",
+    "@langchain/google-vertexai": "^0.0.21"
+  }
+}
