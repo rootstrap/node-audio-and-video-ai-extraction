@@ -14,3 +14,5 @@ Then, we need to set the environment variable GOOGLE_APPLICATION_CREDENTIALS to 
 ```bash
 export GOOGLE_APPLICATION_CREDENTIALS="./keys.json”
 ```
+
+or copy .env.example and complete the env variables with the correct values

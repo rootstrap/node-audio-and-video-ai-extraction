@@ -1,11 +1,12 @@
+require('dotenv').config()
 const {
     ChatPromptTemplate,
     MessagesPlaceholder,
 } = require("@langchain/core/prompts");
 const { ChatVertexAI } = require("@langchain/google-vertexai");
 const { HumanMessage } = require("@langchain/core/messages");
-const fs = require("fs");
-const { fileToBase64 } = require('../utils/fileToBase64')
+const { fileToBase64 } = require('../utils/fileToBase64');
+const { prompts } = require("./prompts");
 
 const mp4File = "test-video.mp4";
 const mp4InBase64 = fileToBase64(mp4File);
@@ -21,8 +22,11 @@ const prompt = ChatPromptTemplate.fromMessages([
     new MessagesPlaceholder("video"),
 ]);
 
-const vertexCall = async () => {
+const vertexCall = async (action = "summarize") => {
+    const humanMessagePrompt = prompts[action.toLowerCase()]
+
     const chain = prompt.pipe(model);
+
     const response = await chain.invoke({
         video: new HumanMessage({
             content: [
@@ -33,7 +37,7 @@ const vertexCall = async () => {
                 },
                 {
                     type: "text",
-                    text: textPrompt,
+                    text: humanMessagePrompt,
                 },
             ],
         }),
