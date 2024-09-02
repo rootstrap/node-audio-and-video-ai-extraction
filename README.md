@@ -15,4 +15,8 @@ Then, we need to set the environment variable GOOGLE_APPLICATION_CREDENTIALS to 
 export GOOGLE_APPLICATION_CREDENTIALS="./keys.json”
 ```
 
-or copy .env.example and complete the env variables with the correct values
+or copy .env.example and complete the env variables with the correct values. After creating the `.env` file with your credentials, you can also run:
+
+```bash
+source .env
+```

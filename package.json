@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "audio": "node audio/index.js",
+    "audio:song": "VERSION=song node audio/index.js",
+    "audio:discussion": "VERSION=discussion node audio/index.js",
     "video": "node video/index.js"
   },
   "keywords": [],

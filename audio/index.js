@@ -7,10 +7,13 @@ const {
 const { ChatVertexAI } = require("@langchain/google-vertexai");
 const { HumanMessage } = require("@langchain/core/messages");
 const { fileToBase64 } = require('../utils/fileToBase64')
+const prompts = require('./prompts')
 
-const mp3File = "audio-test.mp3";
+// Version describes which POC is to be executed: "song" or "discussion".
+const version = process.env.VERSION
+
+const mp3File = `${version}.mp3`;
 const mp3InBase64 = fileToBase64(mp3File);
-const textPrompt = `The following audio is a song. Respond with a list of instruments you hear in the song.`;
 
 const model = new ChatVertexAI({
     model: "gemini-1.5-pro-001",
@@ -32,10 +35,9 @@ const vertexCall = async () => {
                     mimeType: "audio/mp3",
                     data: mp3InBase64,
                 },
-
                 {
                     type: "text",
-                    text: textPrompt
+                    text: prompts[version]
                 },
             ],
         }),
