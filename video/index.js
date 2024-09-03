@@ -8,7 +8,10 @@ const { HumanMessage } = require("@langchain/core/messages");
 const { fileToBase64 } = require('../utils/fileToBase64');
 const prompts = require("./prompts");
 
-const mp4InBase64 = fileToBase64("video3.mp4");
+// Version describes which POC is to be executed: "timeline" or "summary".
+const version = process.env.VERSION
+
+const mp4InBase64 = fileToBase64(`${version}.mp4`);
 
 const model = new ChatVertexAI({
     model: "gemini-1.5-pro-001",
@@ -20,9 +23,9 @@ const prompt = ChatPromptTemplate.fromMessages([
     new MessagesPlaceholder("video"),
 ]);
 
-const vertexCall = async (action = "summarize") => {
-    const humanMessagePrompt = prompts[action.toLowerCase()]
-    console.log("Vertex call started with action:", action)
+const vertexCall = async () => {
+    const humanMessagePrompt = prompts[version]
+    console.log("Vertex call started with action:", version)
 
     const chain = prompt.pipe(model);
 
@@ -47,5 +50,4 @@ const vertexCall = async (action = "summarize") => {
     console.log("Vertex AI call ended, this is the response: ", response.content);
 }
 
-vertexCall()
-
+vertexCall();

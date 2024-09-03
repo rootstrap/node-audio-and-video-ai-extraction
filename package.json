@@ -6,7 +6,8 @@
   "scripts": {
     "audio:song": "VERSION=song node audio/index.js",
     "audio:discussion": "VERSION=discussion node audio/index.js",
-    "video": "node video/index.js"
+    "video:timeline": "VERSION=gen-timeline node video/index.js",
+    "video:summarize": "VERSION=summarize node video/index.js"
   },
   "keywords": [],
   "author": "",
