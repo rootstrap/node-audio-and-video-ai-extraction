@@ -31,6 +31,7 @@ const vertexCall = async () => {
     const chain = prompt.pipe(model);
 
     console.log("Starting request");
+    const startTime = new Date().getTime();
     const response = await chain.invoke({
         audio: new HumanMessage({
             content: [
@@ -46,12 +47,16 @@ const vertexCall = async () => {
             ],
         }),
     });
+    const endTime = new Date().getTime();
+    const elapsedTime = (endTime - startTime) / 1000;
 
     console.log("-----------------------------------------------------------\n");
     console.log("Content: ", response.content);
+    console.log("-----------------------------------------------------------\n");
     console.log("Input tokens used: ", response.usage_metadata.input_tokens);
     console.log("Output tokens used: ", response.usage_metadata.output_tokens);
     console.log("Total tokens used: ", response.usage_metadata.total_tokens);
+    console.log("Request took: ", elapsedTime.toFixed(2), "seconds");
 }
 
 vertexCall()
