@@ -26,7 +26,11 @@ const prompt = ChatPromptTemplate.fromMessages([
 ]);
 
 const vertexCall = async () => {
+    console.log("Vertex call started with action:", version)
+
     const chain = prompt.pipe(model);
+
+    console.log("Starting request");
     const response = await chain.invoke({
         audio: new HumanMessage({
             content: [
@@ -43,7 +47,11 @@ const vertexCall = async () => {
         }),
     });
 
-    console.log(response)
+    console.log("-----------------------------------------------------------\n");
+    console.log("Content: ", response.content);
+    console.log("Input tokens used: ", response.usage_metadata.input_tokens);
+    console.log("Output tokens used: ", response.usage_metadata.output_tokens);
+    console.log("Total tokens used: ", response.usage_metadata.total_tokens);
 }
 
 vertexCall()
